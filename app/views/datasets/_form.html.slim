@@ -1,0 +1,16 @@
+.row
+  .col-xs-6
+    = form.input :status, collection: @status, as: :select, selected: 1, class: 'no-radius'
+  .col-xs-6
+    = form.input :units, placeholder: 'Units'
+.row
+  .col-md-6
+    = form.input :name, placeholder: 'Name'
+  .col-md-6
+    = form.input :slug, placeholder: 'Slug'
+.form-group
+  = form.input :description, as: :text, placeholder: 'Description'
+.form-group
+  = form.input :data_attributes, as: :text, placeholder: 'Data attributes', input_html: { rows: 5 , value: {} }
+.form-group
+  = form.input :data, as: :text, placeholder: 'Data', input_html: { rows: 15 , value: [{}] }

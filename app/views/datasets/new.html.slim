@@ -1,0 +1,6 @@
+h1 New Dataset
+
+= simple_form_for :connector, url: '/datasets', method: :post do |f|
+  = render partial: f
+  .form-group
+    = f.button :submit, 'Create', class: 'btn btn-default'

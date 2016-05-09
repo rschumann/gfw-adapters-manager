@@ -1,0 +1,31 @@
+h1
+  | Datasets
+.text-right
+  = link_to refresh_datasets_path, method: :post do
+    span.glyphicon.glyphicon-refresh
+
+table.table.table-striped
+  thead
+    tr
+      th
+        | ID
+      th
+        | Name
+      th
+        | Slug
+      th
+        | Status
+  tbody
+    - @datasets.each do |dataset|
+      tr
+        td
+          = dataset['id']
+        td
+          = link_to dataset_path(dataset['id']) do
+            span.obj-left = dataset['name']
+            span.glyphicon.glyphicon-link
+
+        td
+          = dataset['slug']
+        td
+          = dataset['status']

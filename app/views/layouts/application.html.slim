@@ -1,0 +1,30 @@
+doctype html
+html lang='en'
+  head
+    meta charset='utf-8'
+    meta name='viewport' content='width=device-width, initial-scale=1.0'
+    title
+      = content_for?(:title) ? yield(:title) : 'GfwAdaptersManager'
+    = csrf_meta_tags
+    = action_cable_meta_tag
+    = stylesheet_link_tag 'application', media: 'all'
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          a.navbar-brand[href="#{root_path}"]
+            | GFW Datasets
+    .jumbotron
+      .container.text-center
+        = link_to 'Create one »', new_dataset_path, class: 'btn btn-default btn-lg obj-left', type: 'button'
+        = link_to 'Discover datasets »', datasets_path, class: 'btn btn-default btn-lg', type: 'button'
+    .container.main-container
+      .row
+        .col-md-12
+          = yield
+      hr
+      footer
+        p
+          | © 2016 vizzuality.
+
+    = javascript_include_tag 'application'

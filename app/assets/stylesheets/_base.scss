@@ -1,0 +1,58 @@
+html {
+  font-family: 'Roboto', sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #565656;
+  background-color: #f6f6f6;
+  padding-top: 50px;
+}
+
+a {
+  color: #282828;
+  font-weight: bold;
+}
+
+* {
+  border-radius: 0 !important;
+}
+
+select.form-control {
+  -webkit-appearance: none;
+}
+
+h1, h2, h3, h4, h6, .navbar-brand {
+  text-transform: uppercase;
+  color: #282828;
+}
+
+strong, table th {
+  color: #282828;
+}
+
+.main-container {
+  background-color: #fff;
+  padding-top: 10px;
+}
+
+.jumbotron {
+  background-image: image-url('peat_drainage.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin-bottom: 0;
+  .btn {
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    color: #000;
+  }
+}
+
+.obj-left {
+  margin-right: 10px;
+}

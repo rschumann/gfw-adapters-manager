@@ -1,0 +1,72 @@
+.row
+  .col-md-6
+    .row
+      .col-md-12
+        h1
+          = @dataset['name']
+        .text-right
+          = link_to refresh_dataset_path(@dataset['id']), method: :post do
+            span.glyphicon.glyphicon-refresh
+
+        table.table.table-striped
+          thead
+            tr
+              th
+                | Status
+              th
+                | Format
+              th
+                | Horizon
+              th
+                | Units
+          tbody
+            tr
+              td
+                = @dataset['meta']['status']
+              td
+                = @dataset['meta']['format']
+              td
+                = @dataset['meta']['horizon']
+              td
+                = @dataset['units']
+      .col-md-12
+        p
+          strong ID
+        p
+          = @dataset['id']
+        p
+          strong Slug
+        p
+          = @dataset['slug']
+        hr
+        p
+          strong Updated at
+        p
+          = @dataset['meta']['updated_at']
+        p
+          strong Created at
+        p
+          = @dataset['meta']['created_at']
+        hr
+        p
+          strong Description
+        p
+          = @dataset['description']
+
+  .col-md-6
+    .row
+      .col-md-6
+        h4
+          strong Data attributes
+      .col-md-6.text-right
+        strong.obj-left
+          | Data rows
+        span.label.label-pill.label-warning
+          = @dataset['meta']['rows']
+    pre
+      p = JSON.pretty_generate(@dataset['meta']['data_attributes'])
+  .col-md-6.text-right
+    = link_to delete_dataset_path(@dataset['id']), data: { confirm: 'Please confirm!' }, method: :post, class: 'btn btn-danger btn-sm' do
+      span.obj-left
+        | Delete
+      span.glyphicon.glyphicon-remove
