@@ -18,7 +18,7 @@ class Datasets
     end
 
     def push
-      url = URI.decode('http://localhost:3000/summary')
+      url = URI.decode("#{ENV['API_URL']}/summary")
 
       @c = Curl::Easy.http_get(URI.escape(url)) do |curl|
         curl.headers['Accept']       = 'application/json'

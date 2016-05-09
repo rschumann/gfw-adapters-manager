@@ -18,7 +18,7 @@ class Dataset
     end
 
     def delete(dataset_id)
-      url  = URI.decode("http://localhost:3000/summary/#{dataset_id}")
+      url  = URI.decode("#{ENV['API_URL']}/summary/#{dataset_id}")
 
       @c = Curl::Easy.http_delete(URI.escape(url)) do |curl|
         curl.headers['Accept']       = 'application/json'
@@ -31,7 +31,7 @@ class Dataset
     end
 
     def push(dataset_id)
-      url = URI.decode("http://localhost:3000/summary/#{dataset_id}")
+      url = URI.decode("#{ENV['API_URL']}/summary/#{dataset_id}")
 
       @c = Curl::Easy.http_get(URI.escape(url)) do |curl|
         curl.headers['Accept']       = 'application/json'
@@ -63,7 +63,7 @@ class Dataset
       @data     = params['data']            if params['data'].present?
       @data_atr = params['data_attributes'] if params['data_attributes'].present?
 
-      url  = URI.decode('http://localhost:3000/summary/new')
+      url  = URI.decode('#{ENV['API_URL']}/summary/new')
       params = { connector: {
                  name: @name, data: Oj.load(@data), data_columns: Oj.load(@data_atr),
                  status: @status, description: @descri, slug: @slug, units: @units }
