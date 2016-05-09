@@ -63,7 +63,7 @@ class Dataset
       @data     = params['data']            if params['data'].present?
       @data_atr = params['data_attributes'] if params['data_attributes'].present?
 
-      url  = URI.decode('#{ENV['API_URL']}/summary/new')
+      url  = URI.decode("#{ENV['API_URL']}/summary/new")
       params = { connector: {
                  name: @name, data: Oj.load(@data), data_columns: Oj.load(@data_atr),
                  status: @status, description: @descri, slug: @slug, units: @units }
