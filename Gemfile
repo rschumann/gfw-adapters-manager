@@ -52,4 +52,5 @@ gem 'foreman'
 gem 'dotenv-rails'
 gem 'redis', '~> 3.2'
 gem 'redis-namespace'
+gem 'newrelic_rpm'
 gem 'rails_12factor', group: :production
