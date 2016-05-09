@@ -53,10 +53,14 @@ class Dataset
       @data_atr = params['data_attributes'] if params['data_attributes'].present?
 
       url  = URI.decode("#{ENV['API_URL']}/summary/#{@id}")
-      params = { connector: {
-                 id: @id, name: @name, data: Oj.load(@data), data_columns: Oj.load(@data_atr),
-                 status: @status, description: @descri, slug: @slug, units: @units }
+      params = {
+                 id: @id, name: @name, data_columns: Oj.load(@data_atr),
+                 status: @status, description: @descri, slug: @slug, units: @units
                }
+
+      params = params.merge(data: Oj.load(@data)) if @data.present?
+
+      params = { connector: params }
 
       @c = Curl::Easy.http_put(URI.escape(url), Oj.dump(params)) do |curl|
         curl.headers['Accept']       = 'application/json'
