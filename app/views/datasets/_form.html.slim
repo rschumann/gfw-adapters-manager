@@ -1,16 +1,18 @@
 .row
   .col-xs-6
-    = form.input :status, collection: @status, as: :select, selected: 1, class: 'no-radius'
+    = form.input :status, collection: @status, as: :select, selected: 1, class: 'no-radius', input_html: { value: @dataset.present? ? @dataset['meta']['status'] : '' }
   .col-xs-6
-    = form.input :units, placeholder: 'Units'
+    = form.input :units, placeholder: 'Units', input_html: { value: @dataset.present? ? @dataset['units'] : '' }
 .row
   .col-md-6
-    = form.input :name, placeholder: 'Name'
+    = form.input :name, placeholder: 'Name', input_html: { value: @dataset.present? ? @dataset['name'] : '' }
   .col-md-6
-    = form.input :slug, placeholder: 'Slug'
+    = form.input :slug, placeholder: 'Slug', input_html: { value: @dataset.present? ? @dataset['slug'] : '' }
 .form-group
-  = form.input :description, as: :text, placeholder: 'Description'
+  = form.input :description, as: :text, placeholder: 'Description', input_html: { value: @dataset.present? ? @dataset['description'] : '' }
 .form-group
-  = form.input :data_attributes, as: :text, placeholder: 'Data attributes', input_html: { rows: 5 , value: {} }
+  = form.input :data_attributes, as: :text, placeholder: 'Data attributes', input_html: { rows: 5 , value: @dataset.present? ? @dataset['meta']['data_attributes'].to_json : {} }
 .form-group
-  = form.input :data, as: :text, placeholder: 'Data', input_html: { rows: 15 , value: [{}] }
+  = form.input :data, as: :text, placeholder: @dataset.present? ? "Important! Update Data in JSON format: [{},{}] or leave this field empty if you don't wish to update the data" : 'Data', input_html: { rows: 15, value: @dataset.blank? ? [{}] : '' }
+- if @dataset.present?
+  = form.hidden_field :id, value: @dataset['id']

@@ -1,0 +1,6 @@
+h1 Edit Dataset
+
+= simple_form_for :connector, url: "/datasets/#{params[:id]}/edit", method: :post do |f|
+  = render partial: f
+  .form-group
+    = f.button :submit, 'Update', class: 'btn btn-default'

@@ -1,5 +1,5 @@
 class DatasetsController < ApplicationController
-  before_action :set_selection, only: [:new, :create]
+  before_action :set_selection, only: [:new, :create, :edit, :update]
 
   def index
     @datasets = Datasets.list
@@ -7,6 +7,15 @@ class DatasetsController < ApplicationController
 
   def show
     @dataset = Dataset.details(params[:id])
+  end
+
+  def edit
+    @dataset = Dataset.details(params[:id])
+  end
+
+  def update
+    Dataset.update(dataset_params)
+    redirect_to dataset_path(params[:id])
   end
 
   def new

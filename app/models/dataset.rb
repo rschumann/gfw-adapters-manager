@@ -17,6 +17,57 @@ class Dataset
       clear_redis_cache(namespace)
     end
 
+    def create(params)
+      @name     = params['name']            if params['name'].present?
+      @slug     = params['slug']            if params['slug'].present?
+      @units    = params['units']           if params['units'].present?
+      @status   = params['status']          if params['status'].present?
+      @descri   = params['description']     if params['description'].present?
+      @data     = params['data']            if params['data'].present?
+      @data_atr = params['data_attributes'] if params['data_attributes'].present?
+
+      url  = URI.decode("#{ENV['API_URL']}/summary/new")
+      params = { connector: {
+                 name: @name, data: Oj.load(@data), data_columns: Oj.load(@data_atr),
+                 status: @status, description: @descri, slug: @slug, units: @units }
+               }
+
+      @c = Curl::Easy.http_post(URI.escape(url), Oj.dump(params)) do |curl|
+        curl.headers['Accept']       = 'application/json'
+        curl.headers['Content-Type'] = 'application/json'
+        curl.username                = ENV['ACCESS_USER']
+        curl.password                = ENV['ACCESS_PASSWORD']
+      end
+
+      clear_redis_cache('datasets')
+    end
+
+    def update(params)
+      @id       = params['id']              if params['id'].present?
+      @name     = params['name']            if params['name'].present?
+      @slug     = params['slug']            if params['slug'].present?
+      @units    = params['units']           if params['units'].present?
+      @status   = params['status']          if params['status'].present?
+      @descri   = params['description']     if params['description'].present?
+      @data     = params['data']            if params['data'].present?
+      @data_atr = params['data_attributes'] if params['data_attributes'].present?
+
+      url  = URI.decode("#{ENV['API_URL']}/summary/#{@id}")
+      params = { connector: {
+                 id: @id, name: @name, data: Oj.load(@data), data_columns: Oj.load(@data_atr),
+                 status: @status, description: @descri, slug: @slug, units: @units }
+               }
+
+      @c = Curl::Easy.http_put(URI.escape(url), Oj.dump(params)) do |curl|
+        curl.headers['Accept']       = 'application/json'
+        curl.headers['Content-Type'] = 'application/json'
+        curl.username                = ENV['ACCESS_USER']
+        curl.password                = ENV['ACCESS_PASSWORD']
+      end
+
+      clear_redis_cache("#{KEY}_#{@id}")
+    end
+
     def delete(dataset_id)
       url  = URI.decode("#{ENV['API_URL']}/summary/#{dataset_id}")
 
@@ -52,31 +103,6 @@ class Dataset
           $redis.set("#{KEY}_#{dataset_id}", items)
         end
       end
-    end
-
-    def create(params)
-      @name     = params['name']            if params['name'].present?
-      @slug     = params['slug']            if params['slug'].present?
-      @units    = params['units']           if params['units'].present?
-      @status   = params['status']          if params['status'].present?
-      @descri   = params['description']     if params['description'].present?
-      @data     = params['data']            if params['data'].present?
-      @data_atr = params['data_attributes'] if params['data_attributes'].present?
-
-      url  = URI.decode("#{ENV['API_URL']}/summary/new")
-      params = { connector: {
-                 name: @name, data: Oj.load(@data), data_columns: Oj.load(@data_atr),
-                 status: @status, description: @descri, slug: @slug, units: @units }
-               }
-
-      @c = Curl::Easy.http_post(URI.escape(url), Oj.dump(params)) do |curl|
-        curl.headers['Accept']       = 'application/json'
-        curl.headers['Content-Type'] = 'application/json'
-        curl.username                = ENV['ACCESS_USER']
-        curl.password                = ENV['ACCESS_PASSWORD']
-      end
-
-      clear_redis_cache('datasets')
     end
 
     def clear_redis_cache(namespace)
