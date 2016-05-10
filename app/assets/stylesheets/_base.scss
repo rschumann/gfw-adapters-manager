@@ -41,15 +41,28 @@ strong, table th {
 }
 
 .jumbotron {
-  /*background-image: image-url('peat_drainage.jpg');
+  background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.75)); /* , image-url('bg_slide1.png');*/
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;*/
+  background-position: top;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
   margin-bottom: 0;
+  .non-padding {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
   .btn {
-    opacity: 0.6;
-    filter: alpha(opacity=60);
-    color: #000;
+    background-color: transparent;
+    color: #e6e6e6;
+    &:hover, &:focus, &:active {
+      color: #000;
+      background-color: #e6e6e6;
+      opacity: 0.6;
+      filter: alpha(opacity=60);
+    }
   }
 }
 

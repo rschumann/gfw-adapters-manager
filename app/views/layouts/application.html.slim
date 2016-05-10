@@ -15,7 +15,7 @@ html lang='en'
           a.navbar-brand[href="#{root_path}"]
             | GFW Datasets
     .jumbotron
-      .container.text-center
+      .container.non-padding.text-right
         = link_to 'Create one »', new_dataset_path, class: 'btn btn-default btn-lg obj-left', type: 'button'
         = link_to 'Discover datasets »', datasets_path, class: 'btn btn-default btn-lg', type: 'button'
     .container.main-container

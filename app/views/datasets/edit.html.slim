@@ -1,5 +1,11 @@
 h1 Edit Dataset
 
+.text-right
+  = link_to dataset_path(@dataset['id']), class: 'btn btn-sm btn-default' do
+    span.obj-left
+      | View
+    span.glyphicon.glyphicon-link
+
 = simple_form_for :connector, url: "/datasets/#{params[:id]}/edit", method: :post do |f|
   = render partial: f
   .form-group
