@@ -42,8 +42,8 @@ table.table.table-striped
               = link_to 'Activate', activate_user_path(user), method: :patch, class: 'btn btn-sm btn-link'
 
         td.text-right
-          - unless current_user
-            = link_to registration_path(user), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger btn-sm obj-left' do
+          - unless user.user_is_current_user?(user, current_user)
+            = link_to user_delete_path(user), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger btn-sm obj-left' do
               span.obj-left
                 | Delete
               span.glyphicon.glyphicon-remove

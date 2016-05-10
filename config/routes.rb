@@ -12,8 +12,9 @@ Rails.application.routes.draw do
     patch 'make_admin', on: :member
     patch 'make_user',  on: :member
 
-    get   'info/edit', to: 'users#edit_info',   as: :edit_info
-    put   'info',      to: 'users#update_info', as: :update_info
+    get    'info/edit', to: 'users#edit_info',   as: :edit_info
+    put    'info',      to: 'users#update_info', as: :update_info
+    delete 'delete',    to: 'users#destroy',     as: :delete
   end
 
   root to: 'home#index'

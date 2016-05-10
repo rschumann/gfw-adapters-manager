@@ -1,0 +1,14 @@
+- if notice
+  .alert.alert-success
+    .container
+      button.close[type="button" data-dismiss="alert" aria-label="Close"]
+        span[aria-hidden="true"]
+          | ×
+      = notice
+- if alert
+  .alert.alert-warning
+    .container
+      button.close[type="button" data-dismiss="alert" aria-label="Close"]
+        span[aria-hidden="true"]
+          | ×
+      = alert

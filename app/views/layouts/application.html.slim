@@ -15,20 +15,7 @@ html lang='en'
           a.navbar-brand[href="#{root_path}"]
             | GFW Datasets
         = render 'layouts/navbar'
-    - if notice
-      .alert.alert-success
-        .container
-          button.close[type="button" data-dismiss="alert" aria-label="Close"]
-            span[aria-hidden="true"]
-              | ×
-          = notice
-    - if alert
-      .alert.alert-warning
-        .container
-          button.close[type="button" data-dismiss="alert" aria-label="Close"]
-            span[aria-hidden="true"]
-              | ×
-          = alert
+    = render 'layouts/alerts'
     - if user_signed_in?
       .jumbotron
         .container.non-padding.text-right
