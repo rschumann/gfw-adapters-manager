@@ -12,6 +12,14 @@
   = form.input :description, as: :text, placeholder: 'Description', input_html: { value: @dataset.present? ? @dataset['description'] : '' }
 .form-group
   = form.input :data_attributes, as: :text, placeholder: 'Data attributes', input_html: { rows: 5 , value: @dataset.present? ? @dataset['meta']['data_attributes'].to_json : {} }
+hr
+.form-group.text-right
+  .btn.btn-default.btn-file
+    span.obj-left
+      | Load data JSON from file
+    span.glyphicon.glyphicon-download
+    input#connector_file[type="file"]
+
 .form-group
   = form.input :data, as: :text, placeholder: @dataset.present? ? "Important! Update Data in JSON format: [{},{}] or leave this field empty if you don't wish to update the data" : 'Data', input_html: { rows: 15, value: @dataset.blank? ? [{}] : '' }
 - if @dataset.present?
