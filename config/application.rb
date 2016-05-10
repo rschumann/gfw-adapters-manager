@@ -18,6 +18,9 @@ Bundler.require(*Rails.groups)
 
 module GfwAdaptersManager
   class Application < Rails::Application
+    config.autoload_paths += Dir[Rails.root.join('api', 'app', 'controllers', 'concerns')]
+    config.autoload_paths += Dir[Rails.root.join('app', 'models', 'users')]
+
     config.generators do |g|
       g.test_framework  :rspec
       g.view_specs      false

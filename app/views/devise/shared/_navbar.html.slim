@@ -1,0 +1,18 @@
+- if user_signed_in?
+  li.dropdown-anchor
+    span class='icon'
+    a.label.-with-icon href="#{user_path(current_user)}"
+      = current_user.name
+    ul class='dropdown-list'
+      li.arrowhelper
+      li
+        = link_to edit_user_registration_path, class: "#{'is-active' if menu_highlight?(:account)}" do
+          = t('navbar.edit_account')
+          span.link-helper
+      li
+        = link_to destroy_user_session_path, method: 'delete' do
+          = t('navbar.logout')
+          span.link-helper
+- else
+  li = link_to t('navbar.login'), new_user_session_path
+  li = link_to t('navbar.register'), new_user_registration_path

@@ -18,6 +18,8 @@ gem 'kaminari'
 gem 'oj',            require: false
 gem 'oj_mimic_json', require: false
 gem 'curb',          require: false
+gem 'devise'
+gem 'cancancan'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'

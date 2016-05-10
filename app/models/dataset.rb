@@ -7,7 +7,7 @@ class Dataset
   KEY = 'dataset'
 
   class << self
-    def details(dataset_id)
+    def find(dataset_id)
       item_caching(dataset_id) do
         push(dataset_id)
       end

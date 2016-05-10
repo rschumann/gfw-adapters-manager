@@ -1,0 +1,53 @@
+h1
+  | Users
+
+table.table.table-striped
+  thead
+    tr
+      th
+        | Info
+      th
+        | Role
+      th
+        | Status
+      th
+      th
+  tbody
+    - @users.each do |user|
+      tr
+        td
+          span
+            = "#{user.full_name_or_username} / "
+          span
+            = "Created: #{user.created_at.to_formatted_s(:short).to_s} / "
+          span
+            = "Updated: #{user.updated_at.to_formatted_s(:short).to_s}"
+          div
+            small
+              = user.email
+        td
+          = user.role_name
+        td
+          = user.status
+        td.text-right
+          - if (can? :make_user, user) && user.admin?
+            = link_to 'Make user', make_user_user_path(user), method: :patch, class: 'btn btn-sm btn-link'
+          - if (can? :make_admin, user) && !user.admin?
+            = link_to 'Make admin', make_admin_user_path(user), method: :patch, class: 'btn btn-sm btn-link'
+
+          - if current_user.admin?
+            - if (can? :activate, user) && user.activated?
+              = link_to 'Deactivate', deactivate_user_path(user), method: :patch, class: 'btn btn-sm btn-link'
+            - if (can? :deactivate, user) && user.deactivated?
+              = link_to 'Activate', activate_user_path(user), method: :patch, class: 'btn btn-sm btn-link'
+
+        td.text-right
+          - unless current_user
+            = link_to registration_path(user), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger btn-sm obj-left' do
+              span.obj-left
+                | Delete
+              span.glyphicon.glyphicon-remove
+          = link_to user_edit_info_path(user), class: 'btn btn-success btn-sm' do
+            span.obj-left
+              | Edit
+            span.glyphicon.glyphicon-edit

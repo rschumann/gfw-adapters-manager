@@ -14,10 +14,26 @@ html lang='en'
         .navbar-header
           a.navbar-brand[href="#{root_path}"]
             | GFW Datasets
-    .jumbotron
-      .container.non-padding.text-right
-        = link_to 'Create one »', new_dataset_path, class: 'btn btn-default btn-lg obj-left', type: 'button'
-        = link_to 'Discover datasets »', datasets_path, class: 'btn btn-default btn-lg', type: 'button'
+        = render 'layouts/navbar'
+    - if notice
+      .alert.alert-success
+        .container
+          button.close[type="button" data-dismiss="alert" aria-label="Close"]
+            span[aria-hidden="true"]
+              | ×
+          = notice
+    - if alert
+      .alert.alert-warning
+        .container
+          button.close[type="button" data-dismiss="alert" aria-label="Close"]
+            span[aria-hidden="true"]
+              | ×
+          = alert
+    - if user_signed_in?
+      .jumbotron
+        .container.non-padding.text-right
+          = link_to 'Create one »', new_dataset_path, class: 'btn btn-default btn-lg obj-left', type: 'button'
+          = link_to 'Discover datasets »', datasets_path, class: 'btn btn-default btn-lg', type: 'button'
     .container.main-container
       .row
         .col-md-12

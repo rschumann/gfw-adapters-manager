@@ -1,0 +1,13 @@
+h2
+  | Info
+  = @user.full_name_or_username
+= simple_form_for @user, url: user_update_info_path(@user), method: :put do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :email, required: true, autofocus: true
+    = f.input :username, required: true
+    = f.input :firstname
+    = f.input :lastname
+    = f.input :institution
+  .form-actions
+    = f.button :submit, "Update"

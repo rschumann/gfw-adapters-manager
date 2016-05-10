@@ -1,29 +1,34 @@
-class DatasetsController < ApplicationController
+class DatasetsController < AuthController
+  before_action :set_dataset,   except: [:index, :new, :create]
   before_action :set_selection, only: [:new, :create, :edit, :update]
 
   def index
     @datasets = Datasets.list
+    authorize! :read, @datasets
   end
 
   def show
-    @dataset = Dataset.details(params[:id])
+    authorize! :read, @dataset
   end
 
   def edit
-    @dataset = Dataset.details(params[:id])
+    authorize! :read, @dataset
   end
 
   def update
     Dataset.update(dataset_params)
     redirect_to dataset_path(params[:id])
+    authorize! :read, @dataset
   end
 
   def new
+    authorize! :read, Dataset
   end
 
   def create
-    @dataset = Dataset.create(dataset_params)
+    Dataset.create(dataset_params)
     redirect_to datasets_path
+    authorize! :read, Dataset
   end
 
   def refresh
@@ -37,11 +42,16 @@ class DatasetsController < ApplicationController
   end
 
   def destroy
-    @dataset = Dataset.delete(params[:id])
+    Dataset.delete(params[:id])
     redirect_to datasets_path
+    authorize! :read, @dataset
   end
 
   private
+
+    def set_dataset
+      @dataset = Dataset.find(params[:id])
+    end
 
     def set_selection
       @status = [['Pending', 0], ['Active', 1], ['Disabled', 2]]
