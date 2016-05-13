@@ -15,24 +15,24 @@ class User < ApplicationRecord
     def find_for_database_authentication(warden_conditions)
       conditions = warden_conditions.dup
       if login = conditions.delete(:login)
-        where(conditions.to_hash).where(["username = :value OR email = :value", { :value => login.downcase }]).first
+        where(conditions.to_hash).where(["username = :value OR email = :value", { value: login.downcase }]).first
       elsif conditions.has_key?(:username) || conditions.has_key?(:email)
         where(conditions.to_hash).first
       end
     end
 
      def filter_users(filters)
-      actives   = filters[:active]['true']  if filters[:active].present?
-      inactives = filters[:active]['false'] if filters[:active].present?
+       actives   = filters[:active]['true']  if filters[:active].present?
+       inactives = filters[:active]['false'] if filters[:active].present?
 
-      users = if actives.present?
-                filter_actives
-              elsif inactives.present?
-                filter_inactives
-              else
-                all
-              end
-      users
+       users = if actives.present?
+                 filter_actives
+               elsif inactives.present?
+                 filter_inactives
+               else
+                 all
+               end
+       users
     end
   end
 

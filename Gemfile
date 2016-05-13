@@ -46,6 +46,9 @@ group :test do
   gem 'timecop'
   gem 'codeclimate-test-reporter', require: nil
   gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'webmock'
+  gem 'fakeredis'
 end
 
 # Server

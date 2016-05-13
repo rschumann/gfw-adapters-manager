@@ -4,7 +4,7 @@ module Abilities
 
     def initialize(user)
       if user.activated?
-        can :mange, ::User, user.id
+        can    :manage, ::User, id: user.id
         can    :read, :all
         cannot :read, ::User
       end

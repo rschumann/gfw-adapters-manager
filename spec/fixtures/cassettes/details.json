@@ -1,0 +1,32 @@
+{
+  "id": "f32805f9-85e2-44b4-b087-6ab497fbb097",
+  "name": "user dataset",
+  "slug": "user-dataset",
+  "units": null,
+  "description": "lorem ipsum",
+  "meta": {
+    "format": "JSON",
+    "status": "active",
+    "horizon": "infinitely",
+    "updated_at": "2016-05-10T20:45:03.289Z",
+    "created_at": "2016-05-10T16:46:56.338Z",
+    "data_attributes": [
+      {
+        "pcpuid": {
+          "type": "string"
+        }
+      },
+      {
+        "the_geom": {
+          "type": "string"
+        }
+      },
+      {
+        "cartodb_id": {
+          "type": "integer"
+        }
+      }
+    ],
+    "rows": 6
+  }
+}
