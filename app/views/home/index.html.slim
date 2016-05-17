@@ -1,5 +1,8 @@
-- if current_user.activated?
-
-- else
+- if current_user && current_user.deactivated?
   h1
     | Please be patient until your account is verified and your datasets are visible on GFW Datasets page.
+
+iframe[frameborder="0" src="https://swaggergo.com/specifications/1123?public_token=9tREChnHtHB6uSFWJLAi8Zne" width="100%" scrolling="no" style="overflow: hidden;"]
+script[src="https://swaggergo.com/assets/iframe.js" type="text/javascript"]
+script
+  | SwaggerGoInit();
